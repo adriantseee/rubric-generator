@@ -1,3 +1,11 @@
+html{
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
 #document-name{
     font-size: 1.5vw;
     font-weight: bold;
@@ -37,3 +45,13 @@
     visibility: visible;
 }
 
+#add-button{
+    height: 80%;
+    width: 80%;
+    margin: 0;
+}
+
+#buttons-container{
+    display: flex;
+    justify-content: row;
+}
