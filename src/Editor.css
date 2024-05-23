@@ -6,6 +6,21 @@ html{
     justify-content: center;
 }
 
+h1{
+    padding: 0;
+    margin: 0;
+}
+
+h2{
+    padding: 0;
+    margin: 0;
+}
+
+p{
+    padding: 0;
+    margin: 0;
+}
+
 #document-name{
     font-size: 1.5vw;
     font-weight: bold;
@@ -54,4 +69,29 @@ html{
 #buttons-container{
     display: flex;
     justify-content: row;
+}
+
+#tabs-container{
+    display: flex;
+    justify-content: row;
+    width: 80vw;
+}
+
+.tab{
+    width: 12.5vw;
+    height: 8vh;
+    text-align: center;
+    border-radius: 10% 10% 0 0;
+}
+
+.tab h2{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#descriptor-editor-container textarea{
+    width: 80vw;
+    box-sizing:border-box;
 }

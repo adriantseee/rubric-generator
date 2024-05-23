@@ -18,13 +18,14 @@ function RubricButton({ rubric, setRubric, isAdd}){
 
     function editTarget(){
         console.log("edit rubric")
+        navigate("/rubric-editor", {state:{isNew: false}});
     }
 
     function editRubric(createNew){
         console.log("create rubric")
         if(createNew){
             console.log("new rubric")
-            navigate("/rubric-editor", {state: true});
+            navigate("/rubric-editor", {state: {isNew: true}});
         }
     }
 
