@@ -14,7 +14,7 @@ function RubricButton({ rubric, setRubric, isAdd}){
             console.log("add rubric")
             setRubric(["hi"]);
         }
-    }
+    } 
 
     function editTarget(){
         console.log("edit rubric")

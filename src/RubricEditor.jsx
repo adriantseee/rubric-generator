@@ -1,8 +1,9 @@
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, act } from "react";
 
 function RubricEditor(){
     let tabs = ["EM", "DE", "EX", "ED"]
+    const [rubricName, setRubricName] = useState("");
     const [activeTab, setActiveTab] = useState(0);
     const [EM, setEM] = useState("");
     const [DE, setDE] = useState("");
@@ -37,6 +38,9 @@ function RubricEditor(){
 
     return (
         <div id="rubric-editor-container" style={{justifyContent: "column"}}>
+            <textarea name="" id="" cols="30" rows="10" value={rubricName} onChange={(e)=>{
+                setRubricName(e.target.value);
+            }}></textarea>
             <div id="tabs-container">
                 {
                     tabs.map((item, index) => {
@@ -49,9 +53,31 @@ function RubricEditor(){
                 }
             </div>
             <div id="descriptor-editor-container">
-                <textarea name="" id="" cols="30" rows="10" onChange={(e)=>{
-                    handleChange(e);
-                }}></textarea>
+                {
+                    activeTab === 0 ?
+                    <textarea name="" id="" cols="30" rows="10" value={EM} onChange={(e)=>{
+                        handleChange(e);
+                    }}></textarea>
+                    :
+                    activeTab === 1 ?
+                    <textarea name="" id="" cols="30" rows="10" value={DE} onChange={(e)=>{
+                        handleChange(e);
+                    }}></textarea>
+                    :
+                    activeTab === 2 ?
+                    <textarea name="" id="" cols="30" rows="10" value={EX} onChange={(e)=>{
+                        handleChange(e);
+                    }}></textarea>
+                    :
+                    <textarea name="" id="" cols="30" rows="10" value={ED} onChange={(e)=>{
+                        handleChange(e);
+                    }}></textarea>
+                }
+            </div>
+            <div id="save-rubric">
+                <button onClick={() => {
+                    console.log("save rubric");
+                }}>Save Rubric</button>
             </div>
         </div>
     )
