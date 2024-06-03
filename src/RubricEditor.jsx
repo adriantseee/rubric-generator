@@ -1,7 +1,18 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useRef, act } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function RubricEditor(){
+    class Rubric{
+        constructor(name, em, de, ex, ed){
+            this.name = name;
+            this.em = em;
+            this.de = de;
+            this.ex = ex;
+            this.ed = ed;
+        }
+    }
+    const navigate = useNavigate();
     let tabs = ["EM", "DE", "EX", "ED"]
     const [rubricName, setRubricName] = useState("");
     const [activeTab, setActiveTab] = useState(0);
@@ -9,11 +20,23 @@ function RubricEditor(){
     const [DE, setDE] = useState("");
     const [EX, setEX] = useState("");
     const [ED, setED] = useState("");
+    var rubric = new Rubric(rubricName, EM, DE, EX, ED);
     const location = useLocation();
     
     useEffect(() => {
         console.log("EM" + EM, "DE" + DE, "EX" + EX, "ED" + ED);
     }, [EM, DE, EX, ED])
+
+    const handleSave = () => {
+        console.log("save rubric");
+        rubric.rubricName = rubricName;
+        rubric.em = EM;
+        rubric.de = DE;
+        rubric.ex = EX;
+        rubric.ed = ED;
+        console.log(location)
+        navigate("/");
+    }
 
     const changeTab = (index) => {
         setActiveTab(index);
@@ -76,7 +99,8 @@ function RubricEditor(){
             </div>
             <div id="save-rubric">
                 <button onClick={() => {
-                    console.log("save rubric");
+                    handleSave();
+                    console.log(rubric);
                 }}>Save Rubric</button>
             </div>
         </div>

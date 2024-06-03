@@ -2,8 +2,7 @@ import './Editor.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-function RubricButton({ rubric, setRubric, isAdd}){
-    const [isNewRubric, setIsNewRubric] = useState(false);
+function RubricButton({ rubric, setRubric, isAdd, setNavigateTo}){
     const navigate = useNavigate();
     function addToRubric(){
         if(rubric){
@@ -18,14 +17,14 @@ function RubricButton({ rubric, setRubric, isAdd}){
 
     function editTarget(){
         console.log("edit rubric")
-        navigate("/rubric-editor", {state:{isNew: false}});
+        setNavigateTo(true);
     }
 
     function editRubric(createNew){
         console.log("create rubric")
         if(createNew){
             console.log("new rubric")
-            navigate("/rubric-editor", {state: {isNew: true}});
+            setNavigateTo(true);
         }
     }
 
