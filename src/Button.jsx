@@ -1,13 +1,14 @@
 import './Editor.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import LearningTarget from './LearningTarget';
 
-function RubricButton({ rubric, setRubric, isAdd, setNavigateTo}){
+function RubricButton({ rubric, setRubric, isAdd, name, em_criteria, de_criteria, ex_criteria, ed_criteria, id}){
     const navigate = useNavigate();
     function addToRubric(){
         if(rubric){
             console.log("add rubric");
-            setRubric([...rubric, "1"]);
+            setRubric([...rubric, LearningTarget({name, em_criteria, de_criteria, ex_criteria, ed_criteria})]);
         }
         else{
             console.log("add rubric")
@@ -17,14 +18,14 @@ function RubricButton({ rubric, setRubric, isAdd, setNavigateTo}){
 
     function editTarget(){
         console.log("edit rubric")
-        setNavigateTo(true);
+        navigate("/rubric-editor", {state:{isNew: false, id: id, name: name, em_criteria: em_criteria, de_criteria: de_criteria, ex_criteria: ex_criteria, ed_criteria: ed_criteria}});
     }
 
     function editRubric(createNew){
         console.log("create rubric")
         if(createNew){
             console.log("new rubric")
-            setNavigateTo(true);
+            navigate("/rubric-editor", {state: {isNew: true}});
         }
     }
 
@@ -43,7 +44,7 @@ function RubricButton({ rubric, setRubric, isAdd, setNavigateTo}){
                     event.stopPropagation();
                 }
                 } id="edit-rubric-button" src="edit.png" alt="edit-button"/>
-                <h2 id="rubric-button">Reporting Category 1</h2>
+                <h2 id="rubric-button">{name}</h2>
             </div>
         }
     </div>

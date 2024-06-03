@@ -1,9 +1,9 @@
 class Rubric{
     constructor(){
         this.standard = "";
-        this.em = "";
-        this.de = "";
-        this.ex = "";
-        this.ed = "";
+        this.emerging = "";
+        this.developing = "";
+        this.exhibiting = "";
+        this.exhibitingDepth = "";
     }
 }

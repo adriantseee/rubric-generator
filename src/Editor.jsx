@@ -1,62 +1,72 @@
 import './Editor.css'
 import Button from './Button';
+import LearningTarget from './LearningTarget';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { fetchLearningTargets } from './test';
 
 function Editor(){
-    const navigate = useNavigate();
-    {/*
-    const location = useLocation()
-    const [rubric, setRubric] = useState(["hi"]);
+    const [loaded, setLoaded] = useState(false);
+    const [rubric, setRubric] = useState([]);
+    const [learningTargets, setLearningTargets] = useState([]);
+
+    const handleFetchLearningTargets = async () => {
+        var temp = await fetchLearningTargets();
+        setLearningTargets(temp);
+        setLoaded(true);
+    }
+
+    useEffect(() => {
+        handleFetchLearningTargets();
+    }, [])
+
     var rubricButtons = [<Button rubric={rubric} setRubric={setRubric} isAdd={false}/>, <Button rubric={rubric} setRubric={setRubric} isAdd={true}/>];
     return(
         <div>
-            <input placeholder="Input Title" id="document-name" style={{margin: "3vh"}}/>
-            <div id="buttons-container">
-                {
-                    rubricButtons.map(item => {
-                        return item;
-                    }
-                )}
-                <h1>{location.rubric}</h1>
+        {
+            !loaded ?
+            <div>
+                loading...
             </div>
-            {
-                rubric?.map(item => {
-                    return <h1>{item}</h1>
-                }
-            )}
-        </div>
-            )*/}
-    class Rubric{
-        constructor(name, em, de, ex, ed){
-            this.name = name;
-            this.em = em;
-            this.de = de;
-            this.ex = ex;
-            this.ed = ed;
-        }
-    }
-    const [rubric, setRubric] = useState(["hi"]);
-    const [navigateTo, setNavigateTo] = useState(false)
-    const [rubricButtons, setRubricButtons] = useState([<Button rubric={rubric} setRubric={setRubric} isAdd={true} setNavigateTo={setNavigateTo}/>]);
-    useEffect(() => {
-        if(navigateTo){
-            navigate("/rubric-editor", {state: {rubric: setRubric}});
-            setNavigateTo(false);
-        }
-    }
-    , [navigateTo])
-    return(
-        <div>
-            <input placeholder="Input Title" id="document-name" style={{margin: "3vh"}}/>
-            <div id="buttons-container">
-                {
-                    rubricButtons.map(item => {
-                        return item;
-                    }
-                )}
+                :
+            <div className="editor-container">
+                <div id="buttons-container">
+                    {
+                        learningTargets.map(item => {
+                            return <Button rubric={rubric} setRubric={setRubric} isAdd={false} name={item.name} em_criteria={item.em_criteria} de_criteria={item.de_criteria} ex_criteria={item.ex_criteria} ed_criteria={item.ed_criteria}/>
+                        }
+                    )}
+                    <Button rubric={rubric} setRubric={setRubric} isAdd={true}/>
+                </div>
+                <div className="table-wrapper-inner">
+                    <div className="learning-targets-container">
+                        <div id="left-div" style={{background: "#8D8D8D", color: "#FBFBFB"}}>
+                            <h2>Measurement Topic</h2>
+                        </div>
+                        <div id="right-div">
+                            <div className="criterias-container">
+                                <div className="criteria-container" style={{fontSize: "0.75vw", background: "#8D8D8D", color: "#FBFBFB"}}>
+                                    <h3>Emerging</h3>
+                                </div>
+                                <div className="criteria-container" style={{fontSize: "0.75vw", background: "#8D8D8D", color: "#FBFBFB"}}>
+                                    <h3>Developing</h3>
+                                </div>
+                                <div className="criteria-container" style={{fontSize: "0.75vw", background: "#8D8D8D", color: "#FBFBFB"}}>
+                                    <h3>Exhibiting</h3>
+                                </div>
+                                <div className="criteria-container" style={{fontSize: "0.75vw", background: "#8D8D8D", color: "#FBFBFB"}}>
+                                    <h3>Exhibting Depth</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {
+                        rubric?.map(item => {
+                            return item;
+                        }
+                    )}
+                </div>
             </div>
+        }
         </div>
     )
 }
