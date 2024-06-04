@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import LearningTarget from './LearningTarget';
 
-function RubricButton({ rubric, setRubric, isAdd, name, em_criteria, de_criteria, ex_criteria, ed_criteria, id}){
+function RubricButton({ rubric, setRubric, exportRubric, setExportRubric, isAdd, name, em_criteria, de_criteria, ex_criteria, ed_criteria, id}){
     const navigate = useNavigate();
     function addToRubric(){
         if(rubric){
             console.log("add rubric");
-            setRubric([...rubric, LearningTarget({name, em_criteria, de_criteria, ex_criteria, ed_criteria})]);
+            setRubric([...rubric, LearningTarget({name, em_criteria, de_criteria, ex_criteria, ed_criteria, rubric, setRubric})]);
+            setExportRubric([...exportRubric, {name, em_criteria, de_criteria, ex_criteria, ed_criteria}]);
         }
         else{
             console.log("add rubric")
@@ -17,7 +18,8 @@ function RubricButton({ rubric, setRubric, isAdd, name, em_criteria, de_criteria
     } 
 
     function editTarget(){
-        console.log("edit rubric")
+        console.log("NOT CREATE, FALSEEE")
+        console.log("id: " + id)
         navigate("/rubric-editor", {state:{isNew: false, id: id, name: name, em_criteria: em_criteria, de_criteria: de_criteria, ex_criteria: ex_criteria, ed_criteria: ed_criteria}});
     }
 

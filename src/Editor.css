@@ -19,6 +19,7 @@ body{
 
 #root{
     width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -139,29 +140,44 @@ p{
     width: 25vw;
 }
 #right-div {
+    margin-left: 10vw;
     display: table-cell;
     width: 60vw;
     height: 100%;
 }
 
 .criterias-container{
+    width: 60vw;
     display: flex;
     justify-content: row;
+    margin-left: 1vw;
 }
 
 .criteria-container{
-    overflow-wrap: break-word;
-    font-size: 75%;
+    font-size: 0.75vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #FBFBFB;
     color: #B7B7B7;
     border-radius: 1vw;
-    width: 25%;
+    width: 15vw;
     height: inherit;
     margin-right: 1vw;
     padding: 0.5vw;
+}
+
+.criteria-desc{
+    overflow-wrap: anywhere;
+}
+
+.criteria-name-container{
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 2.5vh;
 }
 
 .editor-container{

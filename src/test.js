@@ -52,6 +52,42 @@ export async function addToLearningTargets(name, ed_criteria, ex_criteria, de_cr
     }
 }
 
+export async function updateLearningTargets(id, name, ed_criteria, ex_criteria, de_criteria, em_criteria) {
+    try {
+        const { data, error } = await supabase.from('learning_standards').update(
+            { 
+                name: name,
+                ed_criteria: em_criteria,
+                ex_criteria: de_criteria,
+                de_criteria: ex_criteria,
+                em_criteria: ed_criteria,
+            }
+        ).eq('id', id);
+        if(error){
+            throw new Error(error.message);
+        }
+        else{
+            console.log('data: ' + data);
+        }
+    }catch(error){
+        console.error('Error updating learning target:', error);
+    }
+}
+
+export async function deleteLearningTargets(id) {
+    try {
+        const { data, error } = await supabase.from('learning_standards').delete().eq('id', id);
+        if(error){
+            throw new Error(error.message);
+        }
+        else{
+            console.log('data: ' + data);
+        }
+    }catch(error){
+        console.error('Error deleting learning target:', error);
+    }
+}
+
 // Call the fetchLearningTargets function to start fetching and displaying the rows
 // addToLearningTargets('asd', 'asd', 'asd', 'asd', 'asd');
-fetchLearningTargets();
+updateLearningTargets(21, 'asd', 'asd', 'asd', 'asd', 'asd');

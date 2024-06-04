@@ -1,25 +1,47 @@
 import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef, act } from "react";
-import { addToLearningTargets } from "./test";
+import { addToLearningTargets, deleteLearningTargets, updateLearningTargets } from "./test";
 
 function RubricEditor(){
     let tabs = ["EM", "DE", "EX", "ED"]
-    const [rubricName, setRubricName] = useState("");
     const [activeTab, setActiveTab] = useState(0);
     const location = useLocation();
-    const [EM, setEM] = useState("");
-    const [DE, setDE] = useState("");
-    const [EX, setEX] = useState("");
-    const [ED, setED] = useState("");
+    const [rubricName, setRubricName] = useState(location.state?.name || "");
+    const [EM, setEM] = useState(location.state?.em_criteria || "");
+    const [DE, setDE] = useState(location.state?.de_criteria || "");
+    const [EX, setEX] = useState(location.state?.ex_criteria || "");
+    const [ED, setED] = useState(location.state?.ed_criteria || "");
+    const isNew = location.state?.isNew;
+    const id = location.state?.id;
     const navigate = useNavigate();
-    const handleAddToLearningTargets = async () => {
-        await addToLearningTargets(rubricName, EM, DE, EX, ED)
+
+    const handleDeleteLearningTargets = async () => {
+        await deleteLearningTargets(id);
         navigate("/");
+    }
+
+    const handleAddToLearningTargets = async () => {
+        if(isNew){
+            await addToLearningTargets(rubricName, EM, DE, EX, ED);
+            navigate("/");
+        }
+        else{
+            console.log("id: " + id);
+            console.log("rubricName: " + rubricName);
+            console.log("EM: " + EM);
+            console.log("DE: " + DE);
+            console.log("EX: " + EX);
+            console.log("ED: " + ED);
+            await updateLearningTargets(id, rubricName, EM, DE, EX, ED);
+            navigate("/");
+        }
     }
     
     useEffect(() => {
         console.log("EM" + EM, "DE" + DE, "EX" + EX, "ED" + ED);
+        console.log("isNew: " + location.state.isNew, "test: " + isNew);
+        console.log("id: " + location.state.id);
     }, [EM, DE, EX, ED])
 
     const changeTab = (index) => {
@@ -81,10 +103,17 @@ function RubricEditor(){
                     }}></textarea>
                 }
             </div>
-            <div id="save-rubric">
-                <button onClick={() => {
-                    handleAddToLearningTargets();
-                }}>Save Rubric</button>
+            <div style={{display: "flex", flexDirection: "row", justifyContent:"center"}}>
+                <div id="save-rubric">
+                    <button onClick={() => {
+                        handleAddToLearningTargets();
+                    }} style={{marginRight: isNew ? "0" : "2vw"}}>Save Learning Target</button>
+                </div>
+                <div id="delete-rubric">
+                    <button onClick={() => {
+                        handleDeleteLearningTargets();
+                    }} style={{marginLeft: "2vw", background: "red", display: isNew ? "none" : "block"}}>Delete Learning Target</button>
+                </div>
             </div>
         </div>
     )
