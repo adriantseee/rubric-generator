@@ -82,7 +82,7 @@ function Editor(){
                         exportRubric?.map(item => {
                             return(
                                 <div style={{display: "flex", flexDirection: "row", alignItems: "center", position: "relative"}}>
-                                    <img src="trash.png" alt="" style={{width: "1.25vw", height: "1.25vw", verticalAlign: "center", position: "absolute", right: 0}} onClick={(event) =>{
+                                    <img src="/assets/trash.png" alt="" style={{width: "1.25vw", height: "1.25vw", verticalAlign: "center", position: "absolute", right: 0}} onClick={(event) =>{
                                             removeFromRubric(item.name);
                                         }
                                     }/>

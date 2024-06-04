@@ -43,7 +43,7 @@ function RubricButton({ rubric, setRubric, exportRubric, setExportRubric, isAdd,
         {
             isAdd ? 
             <div className="button-container" style={{display: "flex", alignItems: "center", justifyContent: "center"}} onClick={() => editRubric(true)}>
-                <img src="plus.png" id="add-button" />
+                <img src="/assets/plus.png" id="add-button" />
             </div>
             :
             <div className="button-container" onClick={addToRubric}>
@@ -52,7 +52,7 @@ function RubricButton({ rubric, setRubric, exportRubric, setExportRubric, isAdd,
                     editTarget();
                     event.stopPropagation();
                 }
-                } id="edit-rubric-button" src="edit.png" alt="edit-button"/>
+                } id="edit-rubric-button" src="/assets/edit.png" alt="edit-button"/>
                 <h2 id="rubric-button" style={{}}>{name}</h2>
             </div>
         }
