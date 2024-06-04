@@ -10,11 +10,17 @@ function Editor(){
     const [rubric, setRubric] = useState([]);
     const [exportRubric, setExportRubric] = useState([]);
     const [learningTargets, setLearningTargets] = useState([]);
-    const fileName="rubric";
+    const [rubricName, setRubricName] = useState("");
     const exportType= exportFromJSON.types.csv;
 
+    function removeFromRubric(name){
+        setRubric(rubric.filter(item => item.name !== name));
+        setExportRubric(exportRubric.filter(item => item.name !== name));
+    }
+
     function exportToCSV(){
-        console.log("downloading")
+        let fileName = rubricName;
+        console.log("fn: " + fileName);
         exportFromJSON({data: exportRubric, fileName, exportType})
     }
 
@@ -27,18 +33,16 @@ function Editor(){
     useEffect(() => {
         handleFetchLearningTargets();
     }, [])
-
-    var rubricButtons = [<Button rubric={rubric} setRubric={setRubric} isAdd={false}/>, <Button rubric={rubric} setRubric={setRubric} isAdd={true}/>];
     return(
         <div>
         {
             !loaded ?
             <div>
-                loading...
+                Loading...
             </div>
                 :
             <div className="editor-container">
-                <div id="buttons-container">
+                <div id="buttons-container" style={{marginBottom: "12vh"}}>
                     {
                         learningTargets.map(item => {
                             return <Button rubric={rubric} setRubric={setRubric} exportRubric={exportRubric} setExportRubric={setExportRubric} isAdd={false} name={item.name} em_criteria={item.em_criteria} de_criteria={item.de_criteria} ex_criteria={item.ex_criteria} ed_criteria={item.ed_criteria} id={item.id}/>
@@ -46,15 +50,14 @@ function Editor(){
                     )}
                     <Button rubric={rubric} setRubric={setRubric} isAdd={true}/>
                 </div>
-                <div className="export-button">
-                    <button onClick={(event) => 
-                        exportToCSV()
-                    }>Export</button>
-                </div>
-                <div className="table-wrapper">
-                    <div className="learning-targets-container">
-                        <div id="left-div" style={{background: "#B7B7B7", color: "#FBFBFB"}}>
-                            <div className="criteria-name-container">
+                <textarea name="" id="" cols="40" rows="5" placeholder='Enter Your Rubric Name Here:' value={rubricName} onChange={(e)=>{
+                    setRubricName(e.target.value);
+                    console.log(rubricName);
+                }}></textarea>
+                <div className="table-wrapper" style={{backgroundColor: "#8D8D8D"}}>
+                    <div className="learning-targets-container" style={{paddingLeft:"1vw"}}>
+                        <div id="left-div" style={{background: "#B7B7B7", color: "#FBFBFB", marginLeft:"12390128390px"}}>
+                            <div className="criteria-container" style={{marginLeft: "1vw", background: "#B7B7B7", color: "#FBFBFB"}}>
                                 <h2 style={{marginTop: "0.25vh"}}>Measurement Topic</h2>
                             </div>
                         </div>
@@ -76,10 +79,27 @@ function Editor(){
                         </div>
                     </div>
                     {
-                        rubric?.map(item => {
-                            return item
+                        exportRubric?.map(item => {
+                            return(
+                                <div style={{display: "flex", flexDirection: "row", alignItems: "center", position: "relative"}}>
+                                    <img src="trash.png" alt="" style={{width: "1.25vw", height: "1.25vw", verticalAlign: "center", position: "absolute", right: 0}} onClick={(event) =>{
+                                            removeFromRubric(item.name);
+                                        }
+                                    }/>
+                                    <LearningTarget name={item.name} em_criteria={item.em_criteria} de_criteria={item.de_criteria} ex_criteria={item.ex_criteria} ed_criteria={item.ed_criteria} rubric={rubric} setRubric={setRubric}/>
+                                </div>
+                            )
                         }
                     )}
+                </div>
+                <div className="export-button" style={{width: "40vw", height: "10vh", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: "5vh", background: "black", borderRadius: "5vw"}}>
+                    <h1 onClick={ () => {
+                        if(rubricName === ""){
+                            alert("Please enter a rubric name");
+                        }
+                        else{
+                            exportToCSV();
+                        }}}>Export as CSV</h1>
                 </div>
             </div>
         }

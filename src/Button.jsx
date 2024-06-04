@@ -8,6 +8,13 @@ function RubricButton({ rubric, setRubric, exportRubric, setExportRubric, isAdd,
     function addToRubric(){
         if(rubric){
             console.log("add rubric");
+            for(var i = 0; i < exportRubric.length; i++){
+                console.log(exportRubric[i])
+                if(exportRubric[i].name === name){
+                    alert("Rubric already exists")
+                    return;
+                }
+            }
             setRubric([...rubric, LearningTarget({name, em_criteria, de_criteria, ex_criteria, ed_criteria, rubric, setRubric})]);
             setExportRubric([...exportRubric, {name, em_criteria, de_criteria, ex_criteria, ed_criteria}]);
         }
@@ -46,7 +53,7 @@ function RubricButton({ rubric, setRubric, exportRubric, setExportRubric, isAdd,
                     event.stopPropagation();
                 }
                 } id="edit-rubric-button" src="edit.png" alt="edit-button"/>
-                <h2 id="rubric-button">{name}</h2>
+                <h2 id="rubric-button" style={{}}>{name}</h2>
             </div>
         }
     </div>

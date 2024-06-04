@@ -1,33 +1,9 @@
 html{
-    text-align: center;
-    width: 100vw;
+    overflow:auto; 
     display: flex;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-}
-
-body{
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    margin: 0;
 }
-
-#root{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;   
-}
-
 h1{
     padding: 0;
     margin: 0;
@@ -66,7 +42,7 @@ p{
 }
 
 #rubric-button{
-    font-size: 0.75vw;
+    font-size: 1vw;
     text-align: right;
     margin: 0;
     margin-left: 2.5%;
@@ -101,13 +77,14 @@ p{
 }
 
 .tab{
-    width: 12.5vw;
-    height: 8vh;
+    width: 5vw;
+    height: 4vh;
     text-align: center;
-    border-radius: 10% 10% 0 0;
+    border-radius: 20% 10% 0 0;
 }
 
 .tab h2{
+    font-size: 2vw;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -119,9 +96,12 @@ p{
     box-sizing:border-box;
 }
 
-.table-wrapper-inner{
-    display: table;
+.table-wrapper{
+    display: block;
     width: 85vw;
+    height: 50vh;
+    max-height: 50vh;
+    overflow: auto;
     border-spacing: 1vw 0;
     text-align: center;
     margin-top: 5vh;
@@ -129,23 +109,30 @@ p{
 
 .learning-targets-container{
     margin-top: 1vh;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
 }
 
 #left-div {
     display: table-cell;
     background: #FBFBFB;
     color:#B7B7B7;
+    text-align: center;
     border-radius: 1vw;
     font-size: 0.75vw;
     width: 25vw;
+    text-align: center;
+    vertical-align: middle;
+    overflow-y: auto;
 }
 #right-div {
     margin-left: 10vw;
     display: table-cell;
     width: 60vw;
+    font-size: 0.75vw;
     height: 100%;
+    overflow-y: auto;
 }
-
 .criterias-container{
     width: 60vw;
     display: flex;
@@ -176,8 +163,9 @@ p{
     text-align: center;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 2.5vh;
+    height:100%;
 }
 
 .editor-container{
@@ -189,4 +177,85 @@ p{
     height: 80vh;
     border-radius: 1vh;
     margin-top: 1vh;
+}
+
+textarea{
+    resize: none;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    #rubric-button{
+        font-size: 0.75vh;
+        text-align: right;
+        margin: 0;
+        margin-left: 2.5%;
+    }
+
+    .criteria-container{
+        font-size: 1vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #FBFBFB;
+        color: #B7B7B7;
+        border-radius: 1vw;
+        width: 15vw;
+        height: inherit;
+        margin-right: 1vw;
+        padding: 0.5vw;
+    }
+
+    .export-button{
+        font-size: 1.25vw;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px){
+    #rubric-button{
+        font-size: 0.5vh;
+        text-align: right;
+        margin: 0;
+        margin-left: 2.5%;
+    }
+    .criteria-container{
+        font-size: 1.25vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #FBFBFB;
+        color: #B7B7B7;
+        border-radius: 1vw;
+        width: 15vw;
+        height: inherit;
+        margin-right: 1vw;
+        padding: 0.5vw;
+    }
+    .export-button{
+        font-size: 1vw;
+    }
+}
+
+@media screen and (max-width: 480px){
+    #rubric-button{
+        font-size:1vw;
+        text-align: right;
+        margin: 0;
+        margin-left: 2.5%;
+    }
+    .criteria-container{
+        font-size: 1.5vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #FBFBFB;
+        color: #B7B7B7;
+        border-radius: 1vw;
+        width: 15vw;
+        height: inherit;
+        margin-right: 1vw;
+        padding: 0.5vw;
+    }
+    .export-button{
+        font-size: 0.75vw;
+    }
 }

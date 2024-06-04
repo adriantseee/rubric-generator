@@ -67,9 +67,11 @@ function RubricEditor(){
 
     return (
         <div id="rubric-editor-container" style={{justifyContent: "column"}}>
-            <textarea name="" id="" cols="30" rows="10" value={rubricName} onChange={(e)=>{
-                setRubricName(e.target.value);
-            }}></textarea>
+            <div style={{display: "flex", justifyContent: "center", marginBottom: "5vh"}}>
+                <textarea name="" id="" cols="50" rows="2" value={rubricName} onChange={(e)=>{
+                    setRubricName(e.target.value);
+                }}></textarea>
+            </div>
             <div id="tabs-container">
                 {
                     tabs.map((item, index) => {
@@ -103,7 +105,7 @@ function RubricEditor(){
                     }}></textarea>
                 }
             </div>
-            <div style={{display: "flex", flexDirection: "row", justifyContent:"center"}}>
+            <div style={{display: "flex", flexDirection: "row", justifyContent:"center", marginTop: "5vh"}}>
                 <div id="save-rubric">
                     <button onClick={() => {
                         handleAddToLearningTargets();
